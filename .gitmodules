@@ -1,0 +1,3 @@
+[submodule "latex-document-skill"]
+	path = latex-document-skill
+	url = git@github.com:ndpvt-web/latex-document-skill.git
