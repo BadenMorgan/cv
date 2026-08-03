@@ -1,0 +1,346 @@
+% =====================================================================
+%  Baden Morgan -- Resume
+%  Engine: LuaLaTeX (uses fontspec). Compile with:
+%     lualatex resume.tex   (run twice for paracol balancing)
+%  Layout: deep emerald sidebar (left) for quick info,
+%          main column (right) for profile / experience.
+% =====================================================================
+\documentclass[10pt]{article}
+
+% --- Page geometry: no side margins (the columns own the full page width),
+%     but keep vertical breathing room so text never touches the page edge.
+\usepackage[a4paper,top=1.5cm,bottom=1.5cm,left=0pt,right=0pt]{geometry}
+
+\usepackage{fontspec}        % LuaLaTeX font handling (system fonts)
+\usepackage{paracol}         % two columns with full-height colored background
+\usepackage{xcolor}
+\usepackage{tikz}            % circular profile photo
+\usepackage{fontawesome5}    % icons (phone, mail, location, links)
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{ragged2e}
+\usepackage{eso-pic}         % full-height sidebar background
+
+% --------------------------------------------------------------------
+%  Colors
+% --------------------------------------------------------------------
+\definecolor{emerald}{HTML}{0B4D3C}   % deep emerald sidebar
+\definecolor{emeraldlt}{HTML}{1E6B55} % lighter emerald for rules
+\definecolor{sidetext}{HTML}{EAF3EF}  % near-white text on sidebar
+\definecolor{sidemuted}{HTML}{B8D2C8} % muted sidebar text
+\definecolor{maintext}{HTML}{222222}  % body text
+\definecolor{headtext}{HTML}{0B4D3C}  % main-column headings
+
+% --------------------------------------------------------------------
+%  Fonts -- swap these for any system fonts you like
+% --------------------------------------------------------------------
+\setmainfont{Latin Modern Roman}      % body
+\newfontfamily\headingfont{Latin Modern Roman}[Numbers=OldStyle]
+
+% --------------------------------------------------------------------
+%  Hyperlinks
+% --------------------------------------------------------------------
+\hypersetup{
+  colorlinks=true,
+  urlcolor=emeraldlt,
+  linkcolor=emeraldlt,
+  pdftitle={Baden Morgan -- Resume},
+  pdfauthor={Baden Morgan}
+}
+
+% --------------------------------------------------------------------
+%  Layout dimensions
+% --------------------------------------------------------------------
+% Inner padding of the main column. Lists reset \leftskip/\rightskip, so this
+% has to be added back into their margins to keep bullets aligned with headings.
+\newlength{\mainpad}
+\setlength{\mainpad}{1.5em}
+
+\newcommand{\sidebarratio}{0.34}      % sidebar fraction of page width
+\columnratio{\sidebarratio}           % sidebar share of paracol width
+\setlength{\columnsep}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+% Paint a full-page-height emerald rectangle behind the sidebar on every page.
+\AddToShipoutPictureBG{%
+  \AtPageLowerLeft{\textcolor{emerald}{\rule{\sidebarratio\paperwidth}{\paperheight}}}%
+}
+
+% --------------------------------------------------------------------
+%  Helper commands
+% --------------------------------------------------------------------
+
+% Sidebar section heading: small-caps white label + thin rule
+% The sidebar spans both pages, so \nopagebreak stops a heading being
+% stranded at the foot of a page, away from the lines it introduces.
+\newcommand{\sidesection}[1]{%
+  \par\vspace{1.1em}%
+  {\headingfont\bfseries\large\color{sidetext} #1}\par
+  \vspace{2pt}{\color{emeraldlt}\rule{\dimexpr\linewidth-\leftskip-\rightskip\relax}{1.2pt}}\par
+  \nopagebreak[4]\vspace{0.5em}\nopagebreak[4]%
+}
+
+% Main-column section heading
+\newcommand{\mainsection}[1]{%
+  \par\vspace{0.6em}%
+  {\headingfont\bfseries\Large\color{headtext} #1}\par
+  \vspace{2pt}{\color{headtext}\rule{\dimexpr\linewidth-\leftskip-\rightskip\relax}{1pt}}\par
+  \vspace{0.4em}%
+}
+
+% A labelled detail line in the sidebar (icon + text)
+\newcommand{\sideitem}[2]{%
+  \makebox[1.3em][l]{\color{emeraldlt}#1}{\color{sidetext}#2}\par\vspace{2pt}%
+}
+
+% An outlined circle enclosing an icon, used as a motif above a sidebar section
+\newcommand{\circleicon}[1]{%
+  \begin{tikzpicture}
+    \draw[sidetext,line width=0.9pt] (0,0) circle (0.58cm);
+    \node[font=\large\color{sidetext}] at (0,0) {#1};
+  \end{tikzpicture}%
+}
+
+% A centred, uppercase sidebar line. \centering would otherwise discard the
+% column padding, so the text is centred inside a parbox of the padded width.
+\newcommand{\sideline}[1]{%
+  \par\noindent
+  \parbox{\dimexpr\linewidth-\leftskip-\rightskip\relax}{%
+    \centering\footnotesize\color{sidetext}\MakeUppercase{#1}}\par
+  \vspace{0.35em}%
+}
+
+% A centred "LABEL: value" detail line, padded the same way as \sideline
+\newcommand{\detailline}[2]{%
+  \par\noindent
+  \parbox{\dimexpr\linewidth-\leftskip-\rightskip\relax}{%
+    \centering\footnotesize\color{sidetext}\MakeUppercase{#1}: #2}\par
+  \vspace{0.25em}%
+}
+
+% Circular profile photo. Replace path with your own photo to enable.
+% Falls back to initials in a circle if the file is missing.
+\newcommand{\profilephoto}[1]{%
+  \begin{tikzpicture}
+    \IfFileExists{#1}{%
+      \clip (0,0) circle (1.6cm);
+      \node at (0,0) {\includegraphics[width=3.4cm]{#1}};
+    }{%
+      \fill[emeraldlt] (0,0) circle (1.6cm);
+      \node[font=\Huge\bfseries\color{sidetext}] at (0,0) {BM};
+    }
+    \draw[sidetext,line width=1.5pt] (0,0) circle (1.6cm);
+  \end{tikzpicture}%
+}
+
+% Experience entry: title, org, dates
+\newcommand{\role}[3]{%
+  \par\vspace{0.5em}%
+  {\bfseries\large\color{maintext} #1}\par
+  \vspace{1pt}{\color{maintext}\itshape #2}\hfill{\small\color{emeraldlt} #3}\par
+  \vspace{0.3em}%
+}
+
+% Heading row: title on the left (wraps freely), date right-aligned in a
+% fixed-width box so long titles can never collide with the date.
+% Optional arg overrides the date column width.
+\newcommand{\titledate}[3][10em]{%
+  \par\noindent
+  \parbox[t]{\dimexpr\linewidth-\leftskip-\rightskip-#1-0.6em\relax}{\raggedright #2}%
+  \hfill
+  \parbox[t]{#1}{\raggedleft #3}%
+  \par
+}
+
+% Company header: name, location/tenure, date range. Groups the roles beneath it.
+\newcommand{\company}[3]{%
+  \par\vspace{0.6em}%
+  \titledate{\bfseries\large\color{headtext} #1}{\small\color{emeraldlt} #3}%
+  \vspace{1pt}{\small\color{maintext}\itshape #2}\par
+}
+
+% A single role nested under a \company header
+\newcommand{\subrole}[2]{%
+  \par\vspace{0.3em}%
+  \titledate{\bfseries\color{maintext} #1}{\small\color{emeraldlt} #2}%
+  \vspace{0.1em}%
+}
+
+% Education entry: qualification, institution, years.
+% \nopagebreak keeps the institution on the same page as its qualification.
+\newcommand{\degree}[3]{%
+  \par\vspace{0.4em}%
+  \titledate{\bfseries\color{maintext} #1}{\small\color{emeraldlt} #3}%
+  \nopagebreak[4]\vspace{1pt}{\small\color{maintext}\itshape #2}\par
+}
+
+% Compact bullet list used throughout the main column
+\newlist{duties}{itemize}{1}
+\setlist[duties]{leftmargin=\dimexpr\mainpad+1.2em\relax,rightmargin=\mainpad,
+                 itemsep=1pt,topsep=1.5pt,parsep=0pt,label=\textbullet}
+
+% --------------------------------------------------------------------
+\begin{document}
+\pagestyle{empty}
+\color{maintext}
+
+\setlength{\parskip}{0.45em}
+\begin{paracol}{2}
+
+% ====================== SIDEBAR (left) =============================
+\color{sidetext}
+\begin{leftcolumn}
+\setlength{\parskip}{0.4em}
+% inner padding so sidebar text doesn't hug the page edges
+\setlength{\leftskip}{1.5em}\setlength{\rightskip}{1.3em plus 1fil}
+\hspace*{0pt}\\[0.4em]
+{\centering\profilephoto{../assets/img/profile.jpg}\par}
+
+\vspace{0.6em}
+{\centering\headingfont\bfseries\Huge Baden\\ Morgan\par}
+\vspace{2pt}
+{\centering\color{emeraldlt}\rule{2cm}{1.2pt}\par}
+\vspace{0.6em}
+\noindent\parbox{\dimexpr\linewidth-\leftskip-\rightskip\relax}{%
+  \centering\footnotesize\color{sidemuted}\MakeUppercase{Technical Product Manager (IoT) \textbullet{} Ex-Firmware Engineer \textbullet{} Leading firmware, software \& app teams to deliver scalable connected products}}\par
+
+\sidesection{Details}
+{\centering\circleicon{\faIdCard}\par}
+\vspace{0.5em}
+\detailline{Location}{Cape Town, South Africa}
+\detailline{Phone}{(+27) 82 730 3253}
+\detailline{Email}{\href{mailto:baden.david.morgan@gmail.com}{\color{sidetext}baden.david.morgan@gmail.com}}
+\detailline{LinkedIn}{\href{https://www.linkedin.com/in/badendavidmorgan/}{\color{sidetext}badendavidmorgan}}
+\detailline{GitHub}{\href{https://github.com/BadenMorgan}{\color{sidetext}BadenMorgan}}
+
+\sidesection{Expertise}
+{\centering\circleicon{\faCubes}\par}
+\vspace{0.5em}
+\sideline{9+ years in IoT \& embedded}
+\sideline{Firmware $\rightarrow$ product leadership}
+\sideline{Hardware to app, end to end}
+\sideline{Concept $\rightarrow$ production at scale}
+\sideline{Design for manufacture}
+\sideline{Customer obsessed}
+
+% Break the sidebar here so the Strengths and Skills panels stay whole on
+% page 2 rather than splitting across the page boundary.
+\vfill\null\newpage
+
+\sidesection{Strengths}
+{\centering\circleicon{\faHiking}\par}
+\vspace{0.5em}
+\sideline{Communication \& collaboration}
+\sideline{Cross-functional team leadership}
+\sideline{Engineering $\leftrightarrow$ product translator}
+\sideline{Problem solving \& analytical}
+\sideline{Relationship builder}
+
+\sidesection{Skills \& Tools}
+{\centering\circleicon{\faTools}\par}
+\vspace{0.5em}
+\sideline{AI \& agentic tooling}
+\sideline{Embedded \& firmware}
+\sideline{Figma}
+\sideline{Jira \& Confluence}
+\sideline{Agile methodology}
+
+\end{leftcolumn}
+
+% ====================== MAIN COLUMN (right) ========================
+\begin{rightcolumn}
+\color{maintext}
+% inner padding so text doesn't hug the sidebar / page edge
+\setlength{\leftskip}{\mainpad}\setlength{\rightskip}{\mainpad}
+\vspace{1.2em}
+
+\mainsection{Profile}
+I'm a Technical Product Manager with a strong foundation in firmware and
+embedded systems, specialising in IoT and connected device ecosystems. Over
+the past 9+ years at Olarm, I've progressed from embedded engineer to product
+manager, giving me a unique ability to bridge deep technical execution with
+product strategy. I work across firmware, software, and mobile teams to define
+product direction, prioritise roadmaps, and deliver reliable, scalable
+solutions.
+
+A key part of my experience is ensuring that the products we design can be
+successfully manufactured and deployed at scale. I've worked closely with
+engineering and production teams to align product development with
+manufacturing constraints, ensuring a smooth transition from concept to
+production-ready hardware. In addition to product ownership, I've led software
+and app development efforts in parallel with hardware development, ensuring
+cohesive end-to-end product delivery.
+
+I'm particularly passionate about building IoT products that integrate
+hardware, firmware, and software into seamless user experiences---while
+remaining practical, manufacturable, and scalable.
+
+\mainsection{Experience}
+
+\company{Olarm}{Cape Town, South Africa \textbullet{} 9 yrs 5 mos}{Jan 2015 -- Present}
+
+\subrole{Technical Product Manager (IoT)}{Jul 2024 -- Present}
+\begin{duties}
+  \item Lead development of IoT-based products spanning firmware, backend systems, and mobile applications; responsible for defining product requirements, prioritising features, and ensuring delivery across the full product stack.
+  \item Manage feature development for the Olarm ONE system, driving integration across device firmware, mobile applications, and supporting platforms including internal support tooling, Home Assistant, and command-centre systems used by armed-response teams for device management and signal monitoring.
+  \item Lead cross-functional teams across firmware, software, and app development, translating complex technical challenges into clear product direction and prioritised roadmaps.
+  \item Ensure products are manufacturable and scalable by aligning product development with manufacturing constraints alongside engineering and production teams.
+\end{duties}
+
+\subrole{Firmware Team Lead}{Mar 2023 -- Jun 2024}
+\begin{duties}
+  \item Led the firmware team responsible for core IoT device functionality across multiple products, driving architecture, development, and release coordination.
+  \item Delivered firmware for the Olarm LINK and Olarm MAX launches, supporting their release to market.
+  \item Supported international certification of alarm communicators under EN standards, ensuring compliance and readiness for global markets.
+  \item Led the setup and scaling of manufacturing capabilities: defining production processes, selecting equipment, and developing supporting software for assembly and testing.
+\end{duties}
+
+\subrole{Embedded Systems Team Lead}{Jan 2022 -- Feb 2023}
+\begin{duties}
+  \item Led the embedded systems team across both hardware and firmware development during a key growth phase, owning technical direction and delivery across multiple projects.
+  \item Expanded the Olarm PRO and PRO 4G platforms with new integrations and features, while contributing to early development of the next-generation LINK and MAX products.
+  \item Established and scaled a QA function, introducing structured testing processes that improved product stability and release confidence.
+\end{duties}
+
+\subrole{Embedded Systems Engineer \& Support Team Lead}{Apr 2019 -- Dec 2021}
+\begin{duties}
+  \item Built and led the technical support function from the ground up---hiring, training, and mentoring the team and implementing live chat and telephony systems.
+  \item Acted as the bridge between customers, support, and engineering, translating real-world issues into product and reliability improvements.
+  \item Enabled remote firmware updates over WiFi and GSM on a new microcontroller platform, a major step forward in product maintainability and scalability.
+\end{duties}
+
+\subrole{Embedded Systems Engineer}{Feb 2017 -- Mar 2019}
+\begin{duties}
+  \item Designed and developed firmware and hardware for the Olarm Paradox and Olarm Universal (now GEN1), working across embedded software, circuit design, and system integration.
+  \item Built communication protocols and integrations between devices and backend/mobile platforms.
+  \item Supported the transition of products from prototype to commercial deployment, including early manufacturing setup.
+\end{duties}
+
+\subrole{Embedded Software Developer (Intern)}{Jan 2015 -- Jul 2016}
+\begin{duties}
+  \item Developed software enabling the product to interact with home alarm systems, working across varied communications protocols and algorithm design.
+  \item Contributed mechanical design work in SolidWorks and assisted with circuit design and review.
+\end{duties}
+
+\company{University of Cape Town}{White Lab, Cape Town}{Feb 2015 -- Jul 2015}
+\subrole{Instructor / Tutor --- Intel Galileo \& Edison Courses}{6 mos}
+\begin{duties}
+  \item Structured the course plan and learning material, then lectured participants on GPIO, analog input, PWM, UART, sensors, the Linux shell, WiFi, and basic web serving.
+  \item Course success led to three further sessions, with the syllabus extended from the Intel Galileo to the Intel Edison.
+\end{duties}
+
+\company{Intel}{Johannesburg, South Africa}{Nov 2014 -- Dec 2014}
+\subrole{Prototype Engineering Guest}{2 mos}
+\begin{duties}
+  \item Selected to design and build a demonstration project on Intel's Galileo board, and flown to Johannesburg to showcase it at an Intel-hosted faire.
+\end{duties}
+
+\mainsection{Education}
+\degree{BSc in Engineering, Mechatronics}{University of Cape Town}{2012 -- 2016}
+\degree{High School}{Bishops Diocesan College}{2000 -- 2011}
+
+\end{rightcolumn}
+\end{paracol}
+\end{document}
