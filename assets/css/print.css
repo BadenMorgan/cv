@@ -1,0 +1,17 @@
+.print-notice {
+  display: none;
+}
+
+@media print {
+  body > *:not(.print-notice) {
+    display: none !important;
+  }
+
+  .print-notice {
+    display: block !important;
+    padding: 2rem;
+    font-family: system-ui, sans-serif;
+    font-size: 14pt;
+    text-align: center;
+  }
+}

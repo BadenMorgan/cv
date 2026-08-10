@@ -1,0 +1,273 @@
+:root {
+  --emerald: #0b4d3c;
+  --emerald-lt: #1e6b55;
+  --side-text: #eaf3ef;
+  --side-muted: #b8d2c8;
+  --main-text: #222222;
+  --head-text: #0b4d3c;
+  --sidebar-ratio: 34%;
+  --main-pad: 1.5rem;
+  --font-serif: "Latin Modern Roman", "Times New Roman", Times, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  line-height: 1.45;
+  color: var(--main-text);
+  background: #fff;
+}
+
+.noscript-fallback {
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.cv-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--sidebar-ratio) 1fr;
+}
+
+.cv-sidebar {
+  background: var(--emerald);
+  color: var(--side-text);
+  padding: 1.5rem 1.3rem 2rem 1.5rem;
+}
+
+.cv-sidebar-inner {
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.profile-photo {
+  width: 6.8rem;
+  height: 6.8rem;
+  margin: 0.4rem auto 0.6rem;
+  border-radius: 50%;
+  border: 2px solid var(--side-text);
+  object-fit: cover;
+  display: block;
+}
+
+.profile-photo--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--emerald-lt);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--side-text);
+}
+
+.sidebar-name {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.85rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.sidebar-rule {
+  width: 2rem;
+  height: 3px;
+  background: var(--emerald-lt);
+  margin: 0.35rem auto 0.6rem;
+  border: none;
+}
+
+.sidebar-tagline {
+  text-align: center;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--side-muted);
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.side-section {
+  margin-top: 1.1rem;
+}
+
+.side-section-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0 0.15rem;
+}
+
+.side-section-rule {
+  height: 1.2px;
+  background: var(--emerald-lt);
+  border: none;
+  margin: 0 0 0.5rem;
+}
+
+.circle-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto 0.5rem;
+  border: 1px solid var(--side-text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--side-text);
+}
+
+.side-detail,
+.side-line {
+  text-align: center;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  margin: 0.25rem 0;
+}
+
+.side-detail a {
+  color: var(--side-text);
+  text-decoration: none;
+}
+
+.side-detail a:hover {
+  text-decoration: underline;
+}
+
+.cv-main {
+  padding: 1.2rem var(--main-pad) 3rem;
+  min-width: 0;
+}
+
+.virtual-scroll-viewport {
+  position: relative;
+  width: 100%;
+}
+
+.virtual-scroll-spacer {
+  width: 100%;
+  pointer-events: none;
+}
+
+.virtual-scroll-window {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.cv-block {
+  margin-bottom: 0.6rem;
+}
+
+.main-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--head-text);
+  margin: 0.6rem 0 0.15rem;
+}
+
+.main-section-rule {
+  height: 1px;
+  background: var(--head-text);
+  border: none;
+  margin: 0 0 0.4rem;
+}
+
+.title-date-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.title-date-row__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.title-date-row__date {
+  flex: 0 0 10em;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--emerald-lt);
+}
+
+.company-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--head-text);
+}
+
+.company-meta {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0.15rem 0 0.3rem;
+}
+
+.role-title {
+  font-weight: 700;
+  color: var(--main-text);
+}
+
+.role-block {
+  margin-top: 0.35rem;
+}
+
+.text-as-image {
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left top;
+  margin: 0.35rem 0 0.5rem;
+  max-width: 100%;
+}
+
+.text-as-image--fallback {
+  background: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.text-as-image-fallback {
+  font-size: inherit;
+  line-height: 1.45;
+}
+
+.text-as-image-fallback ul {
+  margin: 0.25rem 0;
+  padding-left: 1.2rem;
+}
+
+.text-as-image-fallback p {
+  margin: 0.45em 0;
+}
+
+.degree-institution {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0.1rem 0 0.4rem;
+}
+
+@media (max-width: 768px) {
+  .cv-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-sidebar-inner {
+    position: static;
+    max-height: none;
+  }
+}

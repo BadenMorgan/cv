@@ -1,0 +1,11 @@
+{
+  "name": "cv",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate:text-images": "node scripts/generate-text-images.mjs"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^0.1.65"
+  }
+}
