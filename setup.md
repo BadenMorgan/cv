@@ -30,18 +30,43 @@ export PATH="$PATH:$HOME/Library/TinyTeX/bin/universal-darwin"
 
 #### Windows
 
-Save and run the official installer [`install-bin-windows.bat`](https://yihui.org/tinytex/install-bin-windows.bat) (requires PowerShell). Double-click the `.bat`, or run it from a terminal.
-
-Installs to `%APPDATA%\TinyTeX` (typically `C:\Users\<you>\AppData\Roaming\TinyTeX`), with binaries at:
-
-```
-%APPDATA%\TinyTeX\bin\windows
-```
-
-Add to `PATH` for the current PowerShell session:
+Install with Scoop (preferred):
 
 ```powershell
-$env:Path += ";$env:APPDATA\TinyTeX\bin\windows"
+scoop bucket add r-bucket https://github.com/cderv/r-bucket.git
+scoop install tinytex
+```
+
+Scoop’s post-install runs `tlmgr path add`, which writes the bin dir into your **user** `PATH`:
+
+```
+%USERPROFILE%\scoop\apps\tinytex\current\bin\windows
+```
+
+**Existing PowerShell windows do not pick that up automatically.** Either open a **new** terminal, or refresh this session:
+
+```powershell
+$env:Path = [Environment]::GetEnvironmentVariable('Path','User') + ';' + [Environment]::GetEnvironmentVariable('Path','Machine')
+```
+
+Then verify:
+
+```powershell
+Get-Command tlmgr, lualatex
+```
+
+You should see `tlmgr.bat` and `lualatex.exe` under `...\scoop\apps\tinytex\current\bin\windows\`.
+
+If you prefer not to refresh the whole `PATH`, prepend the bin dir for this session only:
+
+```powershell
+$env:Path = "$env:USERPROFILE\scoop\apps\tinytex\current\bin\windows;" + $env:Path
+```
+
+Alternative — official installer: save and run [`install-bin-windows.bat`](https://yihui.org/tinytex/install-bin-windows.bat). That installs to `%APPDATA%\TinyTeX`. After install, open a new terminal (or refresh `PATH` as above). Session-only override if needed:
+
+```powershell
+$env:Path = "$env:APPDATA\TinyTeX\bin\windows;" + $env:Path
 ```
 
 ### 2. Poppler (PDF → PNG previews)
@@ -54,13 +79,11 @@ brew install poppler
 
 #### Windows
 
-Install [Scoop](https://scoop.sh/) if you do not already have it, then:
-
 ```powershell
 scoop install poppler
 ```
 
-Provides `pdftoppm` / `pdfinfo`, used to render previews of the compiled PDF.
+Provides `pdftoppm` / `pdfinfo`. Scoop shims are usually already on `PATH` in new terminals.
 
 ### 3. LaTeX packages (via `tlmgr`)
 
@@ -94,7 +117,10 @@ lualatex -interaction=nonstopmode resume.tex
 #### Windows
 
 ```powershell
-$env:Path += ";$env:APPDATA\TinyTeX\bin\windows"
+# Skip if you already opened a new terminal after scoop install tinytex
+$env:Path = [Environment]::GetEnvironmentVariable('Path','User') + ';' + [Environment]::GetEnvironmentVariable('Path','Machine')
+
+cd outputs
 lualatex -interaction=nonstopmode resume.tex
 ```
 
@@ -133,4 +159,6 @@ Remove-Item -ErrorAction SilentlyContinue resume.aux, resume.log, resume.out
 | Preview PNGs | `outputs/preview-*.png` |
 | Profile photo | `assets/img/profile.jpg` (referenced as `../assets/img/profile.jpg` from `outputs/`) |
 | TeX engine (macOS) | `~/Library/TinyTeX` |
-| TeX engine (Windows) | `%APPDATA%\TinyTeX` |
+| TeX engine (Windows, Scoop) | `%USERPROFILE%\scoop\apps\tinytex\current` |
+| TeX binaries (Windows, Scoop) | `%USERPROFILE%\scoop\apps\tinytex\current\bin\windows` |
+| TeX engine (Windows, `.bat`) | `%APPDATA%\TinyTeX` |
