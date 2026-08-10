@@ -1,0 +1,230 @@
+{
+  "canonicalUrl": "https://badenmorgan.github.io/cv/",
+  "person": {
+    "nameLines": ["Baden", "Morgan"],
+    "tagline": "Technical Product Manager (IoT) • Ex-Firmware Engineer • Leading firmware, software & app teams to deliver scalable connected products",
+    "photo": "assets/img/profile.jpg",
+    "initials": "BM"
+  },
+  "sidebar": {
+    "details": {
+      "icon": "id-card",
+      "items": [
+        { "label": "Location", "value": "Cape Town, South Africa" },
+        { "label": "Phone", "value": "(+27) 82 730 3253", "href": "tel:+27827303253" },
+        {
+          "label": "Email",
+          "value": "baden.david.morgan@gmail.com",
+          "href": "mailto:baden.david.morgan@gmail.com"
+        },
+        {
+          "label": "LinkedIn",
+          "value": "badendavidmorgan",
+          "href": "https://www.linkedin.com/in/badendavidmorgan/"
+        },
+        {
+          "label": "GitHub",
+          "value": "BadenMorgan",
+          "href": "https://github.com/BadenMorgan"
+        }
+      ]
+    },
+    "expertise": {
+      "icon": "cubes",
+      "lines": [
+        "9+ years in IoT & embedded",
+        "Firmware → product leadership",
+        "Hardware to app, end to end",
+        "Concept → production at scale",
+        "Design for manufacture",
+        "Customer obsessed"
+      ]
+    },
+    "strengths": {
+      "icon": "person-hiking",
+      "lines": [
+        "Communication & collaboration",
+        "Cross-functional team leadership",
+        "Engineering ↔ product translator",
+        "Problem solving & analytical",
+        "Relationship builder"
+      ]
+    },
+    "skills": {
+      "icon": "screwdriver-wrench",
+      "lines": [
+        "AI & agentic tooling",
+        "Embedded & firmware",
+        "Figma",
+        "Jira & Confluence",
+        "Agile methodology"
+      ]
+    }
+  },
+  "textBlocks": {
+    "profile": {
+      "kind": "paragraphs",
+      "paragraphs": [
+        "I'm a Technical Product Manager with a strong foundation in firmware and embedded systems, specialising in IoT and connected device ecosystems. Over the past 9+ years at Olarm, I've progressed from embedded engineer to product manager, giving me a unique ability to bridge deep technical execution with product strategy. I work across firmware, software, and mobile teams to define product direction, prioritise roadmaps, and deliver reliable, scalable solutions.",
+        "A key part of my experience is ensuring that the products we design can be successfully manufactured and deployed at scale. I've worked closely with engineering and production teams to align product development with manufacturing constraints, ensuring a smooth transition from concept to production-ready hardware. In addition to product ownership, I've led software and app development efforts in parallel with hardware development, ensuring cohesive end-to-end product delivery.",
+        "I'm particularly passionate about building IoT products that integrate hardware, firmware, and software into seamless user experiences—while remaining practical, manufacturable, and scalable."
+      ]
+    },
+    "olarm-tpm-duties": {
+      "kind": "bullets",
+      "items": [
+        "Lead development of IoT-based products spanning firmware, backend systems, and mobile applications; responsible for defining product requirements, prioritising features, and ensuring delivery across the full product stack.",
+        "Manage feature development for the Olarm ONE system, driving integration across device firmware, mobile applications, and supporting platforms including internal support tooling, Home Assistant, and command-centre systems used by armed-response teams for device management and signal monitoring.",
+        "Lead cross-functional teams across firmware, software, and app development, translating complex technical challenges into clear product direction and prioritised roadmaps.",
+        "Ensure products are manufacturable and scalable by aligning product development with manufacturing constraints alongside engineering and production teams."
+      ]
+    },
+    "olarm-ftl-duties": {
+      "kind": "bullets",
+      "items": [
+        "Led the firmware team responsible for core IoT device functionality across multiple products, driving architecture, development, and release coordination.",
+        "Delivered firmware for the Olarm LINK and Olarm MAX launches, supporting their release to market.",
+        "Supported international certification of alarm communicators under EN standards, ensuring compliance and readiness for global markets.",
+        "Led the setup and scaling of manufacturing capabilities: defining production processes, selecting equipment, and developing supporting software for assembly and testing."
+      ]
+    },
+    "olarm-estl-duties": {
+      "kind": "bullets",
+      "items": [
+        "Led the embedded systems team across both hardware and firmware development during a key growth phase, owning technical direction and delivery across multiple projects.",
+        "Expanded the Olarm PRO and PRO 4G platforms with new integrations and features, while contributing to early development of the next-generation LINK and MAX products.",
+        "Established and scaled a QA function, introducing structured testing processes that improved product stability and release confidence."
+      ]
+    },
+    "olarm-support-duties": {
+      "kind": "bullets",
+      "items": [
+        "Built and led the technical support function from the ground up—hiring, training, and mentoring the team and implementing live chat and telephony systems.",
+        "Acted as the bridge between customers, support, and engineering, translating real-world issues into product and reliability improvements.",
+        "Enabled remote firmware updates over WiFi and GSM on a new microcontroller platform, a major step forward in product maintainability and scalability."
+      ]
+    },
+    "olarm-ese-duties": {
+      "kind": "bullets",
+      "items": [
+        "Designed and developed firmware and hardware for the Olarm Paradox and Olarm Universal (now GEN1), working across embedded software, circuit design, and system integration.",
+        "Built communication protocols and integrations between devices and backend/mobile platforms.",
+        "Supported the transition of products from prototype to commercial deployment, including early manufacturing setup."
+      ]
+    },
+    "olarm-intern-duties": {
+      "kind": "bullets",
+      "items": [
+        "Developed software enabling the product to interact with home alarm systems, working across varied communications protocols and algorithm design.",
+        "Contributed mechanical design work in SolidWorks and assisted with circuit design and review."
+      ]
+    },
+    "uct-duties": {
+      "kind": "bullets",
+      "items": [
+        "Structured the course plan and learning material, then lectured participants on GPIO, analog input, PWM, UART, sensors, the Linux shell, WiFi, and basic web serving.",
+        "Course success led to three further sessions, with the syllabus extended from the Intel Galileo to the Intel Edison."
+      ]
+    },
+    "intel-duties": {
+      "kind": "bullets",
+      "items": [
+        "Selected to design and build a demonstration project on Intel's Galileo board, and flown to Johannesburg to showcase it at an Intel-hosted faire."
+      ]
+    }
+  },
+  "mainChunks": [
+    {
+      "id": "chunk-profile",
+      "type": "profile",
+      "title": "Profile",
+      "textBlockId": "profile"
+    },
+    {
+      "id": "chunk-olarm",
+      "type": "experience-company",
+      "title": "Experience",
+      "showSectionTitle": true,
+      "company": "Olarm",
+      "meta": "Cape Town, South Africa • 9 yrs 5 mos",
+      "dates": "Jan 2015 – Present",
+      "roles": [
+        {
+          "title": "Technical Product Manager (IoT)",
+          "dates": "Jul 2024 – Present",
+          "dutiesBlockId": "olarm-tpm-duties"
+        },
+        {
+          "title": "Firmware Team Lead",
+          "dates": "Mar 2023 – Jun 2024",
+          "dutiesBlockId": "olarm-ftl-duties"
+        },
+        {
+          "title": "Embedded Systems Team Lead",
+          "dates": "Jan 2022 – Feb 2023",
+          "dutiesBlockId": "olarm-estl-duties"
+        },
+        {
+          "title": "Embedded Systems Engineer & Support Team Lead",
+          "dates": "Apr 2019 – Dec 2021",
+          "dutiesBlockId": "olarm-support-duties"
+        },
+        {
+          "title": "Embedded Systems Engineer",
+          "dates": "Feb 2017 – Mar 2019",
+          "dutiesBlockId": "olarm-ese-duties"
+        },
+        {
+          "title": "Embedded Software Developer (Intern)",
+          "dates": "Jan 2015 – Jul 2016",
+          "dutiesBlockId": "olarm-intern-duties"
+        }
+      ]
+    },
+    {
+      "id": "chunk-uct-intel",
+      "type": "experience-company",
+      "company": "University of Cape Town",
+      "meta": "White Lab, Cape Town",
+      "dates": "Feb 2015 – Jul 2015",
+      "roles": [
+        {
+          "title": "Instructor / Tutor — Intel Galileo & Edison Courses",
+          "dates": "6 mos",
+          "dutiesBlockId": "uct-duties"
+        }
+      ]
+    },
+    {
+      "id": "chunk-intel",
+      "type": "experience-company",
+      "company": "Intel",
+      "meta": "Johannesburg, South Africa",
+      "dates": "Nov 2014 – Dec 2014",
+      "roles": [
+        {
+          "title": "Prototype Engineering Guest",
+          "dates": "2 mos",
+          "dutiesBlockId": "intel-duties"
+        }
+      ]
+    },
+    {
+      "id": "chunk-education",
+      "type": "education",
+      "title": "Education",
+      "degrees": [
+        {
+          "qualification": "BSc in Engineering, Mechatronics",
+          "institution": "University of Cape Town",
+          "years": "2012 – 2016"
+        },
+        {
+          "qualification": "High School",
+          "institution": "Bishops Diocesan College",
+          "years": "2000 – 2011"
+        }
+      ]
+    }
+  ]
+}
