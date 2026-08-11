@@ -45,13 +45,23 @@ body {
   background: var(--emerald);
   color: var(--side-text);
   padding: 1.5rem 1.3rem 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .cv-sidebar-inner {
-  position: sticky;
-  top: 0;
-  max-height: 100vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100%;
+}
+
+.sidebar-colophon {
+  margin-top: auto;
+  padding-top: 2rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--side-muted);
 }
 
 .profile-photo {
@@ -264,10 +274,5 @@ body {
 @media (max-width: 768px) {
   .cv-shell {
     grid-template-columns: 1fr;
-  }
-
-  .cv-sidebar-inner {
-    position: static;
-    max-height: none;
   }
 }

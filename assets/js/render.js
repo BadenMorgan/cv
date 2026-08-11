@@ -188,6 +188,7 @@ export function renderSidebar(data) {
       ${sideSection("Expertise", sidebar.expertise.icon, lines(sidebar.expertise.lines))}
       ${sideSection("Strengths", sidebar.strengths.icon, lines(sidebar.strengths.lines))}
       ${sideSection("Skills & Tools", sidebar.skills.icon, lines(sidebar.skills.lines))}
+      ${sidebar.updated ? `<p class="sidebar-colophon">${escapeHtml(sidebar.updated)}</p>` : ""}
     </div>
   </aside>`;
 }

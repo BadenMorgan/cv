@@ -1,0 +1,42 @@
+---
+description: After a finished CV update the user is happy with, ask whether to update the GitHub Pages site
+alwaysApply: true
+---
+
+# Offer website update after CV work
+
+The PDF/LaTeX résumé (`outputs/resume.tex`) and the GitHub Pages site are separate. The live site reads `assets/data/resume.json` (plus `assets/css/`, `assets/js/`, `index.html`).
+
+## When to ask
+
+Ask once the user has **finished** an update and is **happy** with it. Typical signals:
+
+- They approve the latest compile/preview
+- They say the CV looks good, is done, or they are happy
+- A CV content/layout change is complete and they are not requesting more edits
+
+Do **not** ask mid-iteration, after a failed compile, or for non-CV work (rules, tooling, deploy config only). Ask at most once per finished update.
+
+## How to ask
+
+Use the **AskQuestion** tool (in-chat multiple choice). Do not replace it with a numbered list in prose.
+
+```
+title: Update website?
+questions:
+  - id: update_website
+    prompt: The résumé update looks done. Sync it to the GitHub Pages site (assets/data/resume.json and related web files)?
+    options:
+      - id: yes_sync
+        label: Yes — update the website to match this CV
+      - id: not_now
+        label: Not now — leave the website as-is
+```
+
+If they already said they want the site updated, skip the prompt and sync.
+
+## If they choose yes
+
+1. Sync content from `outputs/resume.tex` into `assets/data/resume.json`.
+2. Update web CSS/JS/HTML only when the CV change needs a layout or visual match.
+3. Do **not** commit or push unless they ask.

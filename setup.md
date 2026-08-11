@@ -112,6 +112,8 @@ From the `outputs/` directory:
 ```bash
 export PATH="$PATH:$HOME/Library/TinyTeX/bin/universal-darwin"
 lualatex -interaction=nonstopmode resume.tex
+cp -f resume.pdf "Baden Morgan Resume.pdf"
+rm -f resume.pdf
 ```
 
 #### Windows
@@ -122,14 +124,18 @@ $env:Path = [Environment]::GetEnvironmentVariable('Path','User') + ';' + [Enviro
 
 cd outputs
 lualatex -interaction=nonstopmode resume.tex
+Copy-Item -Force resume.pdf "Baden Morgan Resume.pdf"
+Remove-Item -Force resume.pdf
 ```
 
 Run twice if paracol column balancing or cross-references look off (not strictly required for this template in practice — single pass has worked).
 
+LuaLaTeX writes `resume.pdf` from the source name. Copy it to **`Baden Morgan Resume.pdf`** (the deliverable) and delete `resume.pdf`. Do not use `-jobname` (spaces break aux/log files).
+
 ## Generating a preview
 
 ```bash
-pdftoppm -png -r 130 resume.pdf preview
+pdftoppm -png -r 130 "Baden Morgan Resume.pdf" preview
 ```
 
 Same command on macOS and Windows (once Poppler is on `PATH`). Produces `preview-1.png`, `preview-2.png`, etc. — one per page.
@@ -155,7 +161,7 @@ Remove-Item -ErrorAction SilentlyContinue resume.aux, resume.log, resume.out
 | Purpose | Path |
 |---|---|
 | Resume source | `outputs/resume.tex` |
-| Compiled PDF | `outputs/resume.pdf` |
+| Compiled PDF | `outputs/Baden Morgan Resume.pdf` |
 | Preview PNGs | `outputs/preview-*.png` |
 | Profile photo | `assets/img/profile.jpg` (referenced as `../assets/img/profile.jpg` from `outputs/`) |
 | TeX engine (macOS) | `~/Library/TinyTeX` |

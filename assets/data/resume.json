@@ -54,12 +54,14 @@
       "icon": "screwdriver-wrench",
       "lines": [
         "AI & agentic tooling",
+        "Cursor",
         "Embedded & firmware",
         "Figma",
         "Jira & Confluence",
         "Agile methodology"
       ]
-    }
+    },
+    "updated": "Updated Aug 2026"
   },
   "textBlocks": {
     "profile": {

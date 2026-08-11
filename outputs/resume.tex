@@ -2,6 +2,7 @@
 %  Baden Morgan -- Resume
 %  Engine: LuaLaTeX (uses fontspec). Compile with:
 %     lualatex resume.tex   (run twice for paracol balancing)
+%  Then copy to "Baden Morgan Resume.pdf" and remove resume.pdf.
 %  Layout: deep emerald sidebar (left) for quick info,
 %          main column (right) for profile / experience.
 % =====================================================================
@@ -110,6 +111,13 @@
   \parbox{\dimexpr\linewidth-\leftskip-\rightskip\relax}{%
     \centering\footnotesize\color{sidetext}\MakeUppercase{#1}}\par
   \vspace{0.35em}%
+}
+
+% Quiet last-page sidebar stamp. Smaller and muted; not uppercase.
+\newcommand{\sidecolophon}[1]{%
+  \par\noindent
+  \parbox{\dimexpr\linewidth-\leftskip-\rightskip\relax}{%
+    \centering\scriptsize\color{sidemuted}#1}\par
 }
 
 % A centred "LABEL: value" detail line, padded the same way as \sideline
@@ -242,10 +250,14 @@
 {\centering\circleicon{\faTools}\par}
 \vspace{0.5em}
 \sideline{AI \& agentic tooling}
+\sideline{Cursor}
 \sideline{Embedded \& firmware}
 \sideline{Figma}
 \sideline{Jira \& Confluence}
 \sideline{Agile methodology}
+
+\vfill
+\sidecolophon{Updated Aug 2026}
 
 \end{leftcolumn}
 
