@@ -270,9 +270,27 @@ export function buildChunkElement(chunk, data, paintWidth) {
   return section;
 }
 
+function encodePath(path) {
+  return String(path)
+    .split("/")
+    .map(encodeURIComponent)
+    .join("/");
+}
+
+function renderPdfButton(pdf) {
+  if (!pdf?.href) return "";
+  const href = encodePath(pdf.href);
+  const filename = pdf.filename || "resume.pdf";
+  const label = pdf.label || "Download PDF";
+  return `<a class="pdf-download" href="${escapeHtml(href)}" download="${escapeHtml(filename)}" aria-label="${escapeHtml(label)}">
+    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+    <span class="pdf-download__label">${escapeHtml(label)}</span>
+  </a>`;
+}
+
 export function renderShell(data) {
   const root = document.getElementById("cv-root");
-  root.innerHTML = `${renderSidebar(data)}<div class="cv-main"><div id="virtual-scroll-root" class="virtual-scroll-viewport"></div></div>`;
+  root.innerHTML = `${renderSidebar(data)}<div class="cv-main"><div id="virtual-scroll-root" class="virtual-scroll-viewport"></div></div>${renderPdfButton(data.pdf)}`;
   root.hidden = false;
   return root;
 }

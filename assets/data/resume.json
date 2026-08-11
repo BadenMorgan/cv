@@ -63,6 +63,11 @@
     },
     "updated": "Updated Aug 2026"
   },
+  "pdf": {
+    "href": "outputs/Baden Morgan Resume.pdf",
+    "filename": "Baden Morgan Resume.pdf",
+    "label": "Download PDF"
+  },
   "textBlocks": {
     "profile": {
       "kind": "paragraphs",
