@@ -1,0 +1,20 @@
+---
+description: Compile the résumé PDF as Baden Morgan Resume.pdf
+alwaysApply: true
+---
+
+# Résumé PDF filename
+
+After every LuaLaTeX compile of `outputs/resume.tex`, the deliverable must be:
+
+`outputs/Baden Morgan Resume.pdf`
+
+Do not use `-jobname` (spaces break aux/log files). Compile as `resume.tex`, copy, then remove the engine PDF so only the named file remains:
+
+```powershell
+lualatex -interaction=nonstopmode resume.tex
+Copy-Item -Force resume.pdf "Baden Morgan Resume.pdf"
+Remove-Item -Force resume.pdf
+```
+
+Tell the user the path is `outputs/Baden Morgan Resume.pdf`.
